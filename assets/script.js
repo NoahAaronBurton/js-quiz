@@ -1,3 +1,12 @@
+// vars
+var startButton = document.getElementById('start-quiz');
+
+var quizBox= document.getElementById('quiz-box');
+var quizText = document.getElementById('quiz-text');
+var quizSubtitle = document.getElementById('quiz-subtitle');
+
+
+
 
 
 // Quiz Questions
@@ -110,9 +119,9 @@ var quizQuestions = [ // items in this array generated via Chat GPT
 
 
 //Event listener for start quiz button
-var startButton = document.getElementById('start-quiz');
+
 startButton.addEventListener('click', function(){
-    displayQuizQuestion(0); // will start with the first item in quiz array
+    displayQuizQuestion(); // will start with the first item in quiz array
 });
 
 

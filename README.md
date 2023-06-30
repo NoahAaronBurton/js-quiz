@@ -208,7 +208,7 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 
 * []()
 * []()
-* []()
+* []() Chat GPT for generating the quiz questions and answers
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
