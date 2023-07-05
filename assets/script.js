@@ -8,7 +8,7 @@ var quizSubtitle = document.getElementById('quiz-subtitle');
 var questionIndex = 0; // we will always start on the first question
 
 var userChoice;
-
+var userScore = 0;
 
 
 
@@ -121,7 +121,7 @@ var quizQuestions = [ // items in this array generated via Chat GPT
 // timer function
  var timeLeft = 30;
  function startTimer() {
-
+  
  }
 
 
