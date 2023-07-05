@@ -118,10 +118,32 @@ var quizQuestions = [ // items in this array generated via Chat GPT
   ];
   
 
-// timer function
- var timeLeft = 30;
- function startTimer() {
+
+
+
+// calculate score
+function calcFinalScore() {
+  alert('You scored ' + userScore + ' points!');
+  finalScore = prompt('Enter your initials to join the leader board') + ' ' + userScore 
+  console.log(finalScore);
+  return finalScore;
   
+}
+
+// timer function
+ var timeLeft = 10000;
+ function startTimer() {
+  var timer = document.getElementById('time-left')
+  var timerInterval = setInterval(function(){
+    timeLeft--;
+    timer.textContent = 'Time remaining: ' +timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      alert('times up!');
+      calcFinalScore();
+    }
+  })
  }
 
 
@@ -167,8 +189,10 @@ function displayQuizQuestion() {
         var correctAnswer = currentQuestion.options[currentQuestion.answer];
         if (userChoice.trim() === correctAnswer.trim()) {
           quizBox.style.backgroundColor = 'green';
+          userScore += 100;
         } else {
           quizBox.style.backgroundColor = 'red';
+          timeLeft -= 1000; // takes time off when incorrect answer is given
         }
       }
     }

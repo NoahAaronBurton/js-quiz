@@ -24,11 +24,32 @@ main {
 }
 
 .container {
-    display: block;
+    display: flex;
+    flex-direction: column;
     background-color: grey;
     padding: 20%;
     width: 60%;
     height: 50%;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#current-score {
+    padding: 5%;
+    
+    
+    justify-content: flex-start;
+}
+
+#time-left {
+    
+    justify-content: flex-end;
+    
+    padding: 5%;
 }
  /* --quiz box-- */
 #quiz-box {
