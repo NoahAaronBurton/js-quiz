@@ -5,6 +5,9 @@ var quizBox= document.getElementById('quiz-box');
 var quizText = document.getElementById('quiz-text');
 var quizSubtitle = document.getElementById('quiz-subtitle');
 
+var questionIndex = 0; // we will always start on the first question
+
+var userChoice;
 
 
 
@@ -114,13 +117,68 @@ var quizQuestions = [ // items in this array generated via Chat GPT
   ];
   
 
+// timer function
+ var timeLeft = 30;
+ function startTimer() {
+
+ }
+
 
 // function for displaying quiz questions
+function displayQuizQuestion() {
+  // clear current quiz box data
+  quizText.style.display = 'none';
+  quizSubtitle.style.display = 'none';
+  startButton.style.display = 'none';
+  // get index for current question
+  var currentQuestion = quizQuestions[questionIndex]; // references the var declared at the top
+  console.log(currentQuestion);
 
+  // create question text
+  var newQuizText = document.createElement('h3');
+  newQuizText.textContent = currentQuestion.question;
+  quizBox.appendChild(newQuizText);
+
+  // create options list
+  for (var i = 0; i < currentQuestion.options.length; i++ ) {
+    var optionText = currentQuestion.options[i]; // new option text is set to current iteration of the loop
+
+    var optionButton = document.createElement('button'); // create new button for option
+    optionButton.textContent = optionText;
+
+    quizBox.appendChild(optionButton);
+  }
+
+  // listen for click inside quiz box
+  quizBox.addEventListener('click', function(event) {
+    var clickedChoice = event.target; // targets and accesses HTML element the user clicks
+    
+
+    //check if what they clicked is a button
+    if (clickedChoice.nodeName === 'BUTTON') { // Chat GPT helped me decide to use nodeName property
+      userChoice = clickedChoice.textContent;
+      console.log(clickedChoice);
+      isCorrect(); // execute this function if they did click a button
+    }
+
+
+    // check if answer is correct 
+    function isCorrect() {
+      var correctAnswer = currentQuestion.options[currentQuestion.answer];
+      if (userChoice === correctAnswer) {
+        quizBox.style.backgroundColor = 'green';
+      } 
+    }
+  });
+};
+
+
+
+// Event listener for user choice
 
 //Event listener for start quiz button
-
 startButton.addEventListener('click', function(){
+    startTimer();
     displayQuizQuestion(); // will start with the first item in quiz array
 });
 

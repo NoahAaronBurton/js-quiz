@@ -31,7 +31,7 @@ main {
     height: 50%;
 }
  /* --quiz box-- */
-.quiz-box {
+#quiz-box {
     display: flex;
     flex-direction: column;
    padding: 5px;
