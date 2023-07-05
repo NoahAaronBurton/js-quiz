@@ -12,6 +12,7 @@ var userChoice;
 
 
 
+
 // Quiz Questions
 var quizQuestions = [ // items in this array generated via Chat GPT
     {
@@ -152,32 +153,36 @@ function displayQuizQuestion() {
   // listen for click inside quiz box
   quizBox.addEventListener('click', function(event) {
     var clickedChoice = event.target; // targets and accesses HTML element the user clicks
-    
-
     //check if what they clicked is a button
     if (clickedChoice.nodeName === 'BUTTON') { // Chat GPT helped me decide to use nodeName property
-      userChoice = clickedChoice.textContent;
+      userChoice = clickedChoice.textContent.trim();
       console.log(clickedChoice);
-      isCorrect(); // execute this function if they did click a button
+      isCorrect(); // execute this function if they click a button
     }
 
 
     // check if answer is correct 
     function isCorrect() {
-      var correctAnswer = currentQuestion.options[currentQuestion.answer];
-      if (userChoice === correctAnswer) {
-        quizBox.style.backgroundColor = 'green';
-      } 
+      if (userChoice !== startButton.textContent) {
+        var correctAnswer = currentQuestion.options[currentQuestion.answer];
+        if (userChoice.trim() === correctAnswer.trim()) {
+          quizBox.style.backgroundColor = 'green';
+        } else {
+          quizBox.style.backgroundColor = 'red';
+        }
+      }
     }
   });
 };
 
 
 
-// Event listener for user choice
+
 
 //Event listener for start quiz button
 startButton.addEventListener('click', function(){
+  
+  
     startTimer();
     displayQuizQuestion(); // will start with the first item in quiz array
 });
