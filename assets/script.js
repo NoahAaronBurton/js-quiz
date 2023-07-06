@@ -179,7 +179,8 @@ function displayQuizQuestion() {
     if (clickedChoice.nodeName === 'BUTTON') { // Chat GPT helped me decide to use nodeName property
       userChoice = clickedChoice.textContent.trim();
       console.log(clickedChoice);
-      isCorrect(); // execute this function if they click a button
+      isCorrect(); // execute these functions if they click a button
+      updateScore();
     }
 
 
@@ -196,7 +197,13 @@ function displayQuizQuestion() {
         }
       }
     }
+    // update current score
+    function updateScore () {
+      var currentScore = document.getElementById('current-score');
+      currentScore.innerHTML = 'Current Score: ' + userScore;
+    }
   });
+
 };
 
 
