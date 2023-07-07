@@ -12,6 +12,8 @@ var userScore = 0;
 
 var currentQuestion;
 
+var highScoreButton = document.getElementById('highscore-button');
+var highScores = [];
 
 
 // Quiz Questions
@@ -119,25 +121,52 @@ const quizQuestions = [ // items in this array generated via Chat GPT
   ];
   
 
+// pull highscores from local storage
+function init() {
+  startButton.style.display = 'block';
+  storedHighScores = JSON.parse(localStorage.getItem("highScores"));
+  if (storedHighScores !== null) { // if high score list is empty
+    highScores = storedHighScores; // pull them from local storage
+  }
+}
 
+// render high scores when button is pressed
+highScoreButton.addEventListener('click', function(){
+  
+  //event.preventDefault();
+  quizText.style.display = 'none';
+  quizSubtitle.style.display = 'none';
+  //startButton.style.display = 'none';
 
+  for (var i = 0; i < highScores.length; i++){
+    var highScoreEntry = document.createElement('h3');
+    highScoreEntry.textContent=storedHighScores[i];
+    quizBox.appendChild(highScoreEntry);
+  }
+  
+
+});
 
 // calculate score
 function calcFinalScore() {
   alert('You scored ' + userScore + ' points!');
   var finalScore = prompt('Enter your initials to join the leader board') + ' ' + userScore 
   console.log(finalScore);
-  return finalScore;
+  highScores.push(finalScore);
+  localStorage.setItem("highScores", JSON.stringify(highScores));
+  console.log(highScores);
+  init();
+  
   
 };
 // check if answer is correct 
 function isCorrect() {
     var correctAnswer = currentQuestion.options[currentQuestion.answer];
     if (userChoice.trim() === correctAnswer.trim()) {
-      quizBox.style.backgroundColor = 'green';
+      //quizBox.style.backgroundColor = 'green';
       userScore += 100;
     } else {
-      quizBox.style.backgroundColor = 'red';
+      //quizBox.style.backgroundColor = 'red';
       timeLeft -= 5; // takes time off when incorrect answer is given
     }
   
@@ -253,7 +282,9 @@ startButton.addEventListener('click', function(){
   
   
     startTimer();
+    questionIndex =0;
     displayQuizQuestion(); // will start with the first item in quiz array
 });
 
 
+init();
