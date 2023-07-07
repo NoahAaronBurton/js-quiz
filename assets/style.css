@@ -67,6 +67,7 @@ main {
 }
 #quiz-subtitle {
     justify-self: flex-start;
+    line-height: 30px;
 }
 #start-quiz {
     align-self: center;
