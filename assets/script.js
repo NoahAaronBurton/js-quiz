@@ -17,6 +17,8 @@ var currentQuestion;
 var highScoreButton = document.getElementById('highscore-button');
 var highScores = [];
 
+var userAnswered = false;
+
 
 // Quiz Questions
 const quizQuestions = [ // items in this array generated via Chat GPT
@@ -164,6 +166,9 @@ function calcFinalScore() {
 };
 // check if answer is correct 
 function isCorrect() {
+  if (userAnswered) {
+    return;
+  }
     var correctAnswer = currentQuestion.options[currentQuestion.answer];
     var isAnswerCorrect = userChoice.trim() === correctAnswer.trim();
     if (isAnswerCorrect) {
@@ -200,6 +205,7 @@ function updateScore () {
 
 // function for displaying quiz questions
 function displayQuizQuestion() {
+  userAnswered = false;
   if (questionIndex >= quizQuestions.length){
     
     //currentQuestion = quizQuestions[questionIndex];
@@ -259,7 +265,7 @@ function displayQuizQuestion() {
       console.log(clickedChoice);
       isCorrect(); // execute these functions if they click a button
       updateScore();
-      
+      userAnswered = true;
       
 
       
