@@ -4,6 +4,8 @@ var startButton = document.getElementById('start-quiz');
 var quizBox= document.getElementById('quiz-box');
 var quizText = document.getElementById('quiz-text');
 var quizSubtitle = document.getElementById('quiz-subtitle');
+var initQuizBox = quizBox.innerHTML; // stores inital state of the quiz box to reset it
+
 
 var questionIndex = 0; // we will always start on the first question
 
@@ -155,6 +157,7 @@ function calcFinalScore() {
   highScores.push(finalScore);
   localStorage.setItem("highScores", JSON.stringify(highScores));
   console.log(highScores);
+  quizBox.innerHTML= initQuizBox;
   init();
   
   
@@ -162,7 +165,8 @@ function calcFinalScore() {
 // check if answer is correct 
 function isCorrect() {
     var correctAnswer = currentQuestion.options[currentQuestion.answer];
-    if (userChoice.trim() === correctAnswer.trim()) {
+    var isAnswerCorrect = userChoice.trim() === correctAnswer.trim();
+    if (isAnswerCorrect) {
       //quizBox.style.backgroundColor = 'green';
       userScore += 100;
     } else {
@@ -204,6 +208,7 @@ function displayQuizQuestion() {
   }
   var optionButtons = []; // array to store the option buttons
   // clear current quiz box data
+  quizBox.innerHTML = '';
   quizText.style.display = 'none';
   quizSubtitle.style.display = 'none';
   startButton.style.display = 'none';
@@ -211,7 +216,7 @@ function displayQuizQuestion() {
   
   // get index for current question
   currentQuestion = quizQuestions[questionIndex]; // references the var declared at the top
-  console.log(currentQuestion);
+
 
   // create question text
   var newQuizText = document.createElement('h3');
@@ -275,14 +280,20 @@ function displayQuizQuestion() {
 
 
 
-
+function resetQuiz (){
+  questionIndex =0;
+  userScore = 0; // reset the score
+  timeLeft = 60; // reset the timer
+  updateScore();
+}
 
 //Event listener for start quiz button
 startButton.addEventListener('click', function(){
   
   
     startTimer();
-    questionIndex =0;
+    
+    resetQuiz();
     displayQuizQuestion(); // will start with the first item in quiz array
 });
 
