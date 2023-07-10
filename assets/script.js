@@ -138,16 +138,16 @@ function init() {
 highScoreButton.addEventListener('click', function(){
   
   //event.preventDefault();
-  quizText.style.display = 'none';
+  quizText.textContent = 'Highscores:';
   quizSubtitle.style.display = 'none';
-  //startButton.style.display = 'none';
+  
 
   for (var i = 0; i < highScores.length; i++){
     var highScoreEntry = document.createElement('h3');
     highScoreEntry.textContent=storedHighScores[i];
     quizBox.appendChild(highScoreEntry);
   }
-  
+
 
 });
 
