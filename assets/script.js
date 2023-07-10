@@ -4,8 +4,7 @@ var startButton = document.getElementById('start-quiz');
 var quizBox= document.getElementById('quiz-box');
 var quizText = document.getElementById('quiz-text');
 var quizSubtitle = document.getElementById('quiz-subtitle');
-var initQuizBox = quizBox.innerHTML; // stores inital state of the quiz box to reset it
-
+var initQuizBox = quizBox.innerHTML; // stores initial state of the quiz box to reset it
 
 var questionIndex = 0; // we will always start on the first question
 
@@ -125,7 +124,7 @@ const quizQuestions = [ // items in this array generated via Chat GPT
   ];
   
 
-// pull highscores from local storage
+// pull high scores from local storage
 function init() {
   startButton.style.display = 'block';
   storedHighScores = JSON.parse(localStorage.getItem("highScores"));
@@ -141,7 +140,6 @@ highScoreButton.addEventListener('click', function(){
   quizText.textContent = 'Highscores:';
   quizSubtitle.style.display = 'none';
   
-
   for (var i = 0; i < highScores.length; i++){
     var highScoreEntry = document.createElement('h3');
     highScoreEntry.textContent=storedHighScores[i];
@@ -155,15 +153,12 @@ highScoreButton.addEventListener('click', function(){
 function calcFinalScore() {
   alert('You scored ' + userScore + ' points!');
   var finalScore = prompt('Enter your initials to join the leader board') + ' ' + userScore 
-  console.log(finalScore);
   highScores.push(finalScore);
   localStorage.setItem("highScores", JSON.stringify(highScores));
-  console.log(highScores);
   quizBox.innerHTML= initQuizBox;
-  init();
-  
-  
+  init(); 
 };
+
 // check if answer is correct 
 function isCorrect() {
   if (userAnswered) {
@@ -172,10 +167,8 @@ function isCorrect() {
     var correctAnswer = currentQuestion.options[currentQuestion.answer];
     var isAnswerCorrect = userChoice.trim() === correctAnswer.trim();
     if (isAnswerCorrect) {
-      //quizBox.style.backgroundColor = 'green';
       userScore += 100;
     } else {
-      //quizBox.style.backgroundColor = 'red';
       timeLeft -= 5; // takes time off when incorrect answer is given
     }
   
@@ -238,12 +231,6 @@ function displayQuizQuestion() {
     quizBox.appendChild(newQuizText);
   }
 
-  
- 
-
-
-
-
   // create options list
   for (var i = 0; i < currentQuestion.options.length; i++ ) {
     var optionText = currentQuestion.options[i]; // new option text is set to current iteration of the loop
@@ -276,10 +263,6 @@ function displayQuizQuestion() {
       questionIndex++; // move to next question
       displayQuizQuestion();
     }
-
-
-    
-    
   });
 
 };
@@ -295,13 +278,9 @@ function resetQuiz (){
 
 //Event listener for start quiz button
 startButton.addEventListener('click', function(){
-  
-  
     startTimer();
-    
     resetQuiz();
     displayQuizQuestion(); // will start with the first item in quiz array
 });
-
 
 init();
